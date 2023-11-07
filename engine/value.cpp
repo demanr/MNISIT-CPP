@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdint.h>
 #include <vector>
+#include <math.h> // for power
 
 class Value
 {
@@ -62,7 +63,7 @@ public:
     {
         this->prev = prev;
     }
-
+    // operator overloading
     Value operator+(Value &other)
     {
         std::set<Value *> outChildren = {this, &other};
@@ -70,11 +71,42 @@ public:
 
         return out;
     }
-
+    // multiplication
     Value operator*(Value &other)
     {
         std::set<Value *> outChildren = {this, &other};
         Value out = Value((this->data * other.data), outChildren, "*");
+
+        return out;
+    }
+    // division
+    Value operator/(Value &other)
+    {
+        std::set<Value *> outChildren = {this, &other};
+        Value out = Value((this->data / other.data), outChildren, "*");
+
+        return out;
+    }
+    // subtraction
+    Value operator-(Value &other)
+    {
+        std::set<Value *> outChildren = {this, &other};
+        Value out = Value((this->data - other.data), outChildren, "-");
+
+        return out;
+    }
+    // negation
+    Value operator-()
+    {
+        return Value(-(this->data));
+    }
+    // power
+    Value operator^(Value &other)
+    {
+        std::set<Value *> outChildren = {this, &other};
+        double outData = pow(this->data, other.data);
+
+        Value out = Value(outData, outChildren, "^");
 
         return out;
     }
@@ -83,9 +115,10 @@ public:
 int main()
 {
     Value a = Value(1.0);
-    Value b = Value(2.0);
+    Value b = Value(-1.0);
     Value c = Value(3.0);
-    Value d = b * c;
+    Value e = c + a;
+    Value d = c ^ b;
 
     printf("%f\n", b.getData());
     printf("%f\n", c.getData());
