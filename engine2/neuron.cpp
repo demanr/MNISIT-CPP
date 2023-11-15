@@ -14,6 +14,11 @@ void printVector(vector<double> v)
     cout << endl;
 }
 
+double ReLu(double num)
+{
+    return max(0.0, num);
+}
+
 class Neuron
 {
 public:
@@ -49,7 +54,6 @@ public:
     // calculate output forward pass
     double calcOutput(vector<double> inputs)
     {
-
         double out = this->bias;
         this->inputs = inputs; // save inputs for backwards pass
 
@@ -57,18 +61,22 @@ public:
         {
             out += inputs.at(i) * this->weights.at(i);
         }
-        this->output = out;
+        this->output = ReLu(out);
 
-        return out;
+        return this->output;
     }
 
     // calculate gradients backward pass
     void calcGrads(double grad) // grad is gradient from neuron next
     {
-        this->biasGrad += grad;
-        for (int i = 0; i < this->weights.size(); i++)
+        // ReLu derivative, if output is 0, gradient and bias have 0 added
+        if (this->output != 0.0)
         {
-            this->weightGrads[i] += grad * this->inputs[i];
+            this->biasGrad += grad;
+            for (int i = 0; i < this->weights.size(); i++)
+            {
+                this->weightGrads[i] += grad * this->inputs[i];
+            }
         }
     }
 
@@ -78,6 +86,15 @@ public:
         for (int i = 0; i < this->weights.size(); i++)
         {
             this->weightGrads[i] = 0.0;
+        }
+    }
+    void update(double learningRate)
+    {
+        // update bias
+        this->bias -= this->biasGrad * learningRate;
+        for (int i = 0; i < inputAmount; i++)
+        {
+            this->weights[i] -= this->weightGrads[i] * learningRate;
         }
     }
 };
