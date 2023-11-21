@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include "neuron.h"
 
 using namespace std;
 
@@ -97,8 +98,16 @@ public:
             this->weights[i] -= this->weightGrads[i] * learningRate;
         }
     }
+
+    // move constructor
+    Neuron(Neuron &&other)
+    {
+        this->weights = std::move(other.weights);
+        this->bias = other.bias;
+    }
 };
 
+/*
 int main()
 {
     srand(time(NULL));
@@ -167,3 +176,4 @@ int main()
 
     return 0;
 }
+*/
