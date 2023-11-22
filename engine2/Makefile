@@ -177,6 +177,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/mnistData.o: src/mnistData.cpp.o
+.PHONY : src/mnistData.o
+
+# target to build an object file
+src/mnistData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mnistData.cpp.o
+.PHONY : src/mnistData.cpp.o
+
+src/mnistData.i: src/mnistData.cpp.i
+.PHONY : src/mnistData.i
+
+# target to preprocess a source file
+src/mnistData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mnistData.cpp.i
+.PHONY : src/mnistData.cpp.i
+
+src/mnistData.s: src/mnistData.cpp.s
+.PHONY : src/mnistData.s
+
+# target to generate assembly for a file
+src/mnistData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mnistData.cpp.s
+.PHONY : src/mnistData.cpp.s
+
 src/net.o: src/net.cpp.o
 .PHONY : src/net.o
 
@@ -240,6 +264,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/mnistData.o"
+	@echo "... src/mnistData.i"
+	@echo "... src/mnistData.s"
 	@echo "... src/net.o"
 	@echo "... src/net.i"
 	@echo "... src/net.s"

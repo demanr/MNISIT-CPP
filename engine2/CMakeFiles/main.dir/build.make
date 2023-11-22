@@ -97,10 +97,24 @@ CMakeFiles/main.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/main.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/main.cpp -o CMakeFiles/main.dir/src/main.cpp.s
 
+CMakeFiles/main.dir/src/mnistData.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/mnistData.cpp.o: src/mnistData.cpp
+CMakeFiles/main.dir/src/mnistData.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/mnistData.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/mnistData.cpp.o -MF CMakeFiles/main.dir/src/mnistData.cpp.o.d -o CMakeFiles/main.dir/src/mnistData.cpp.o -c /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/mnistData.cpp
+
+CMakeFiles/main.dir/src/mnistData.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/mnistData.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/mnistData.cpp > CMakeFiles/main.dir/src/mnistData.cpp.i
+
+CMakeFiles/main.dir/src/mnistData.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/mnistData.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/mnistData.cpp -o CMakeFiles/main.dir/src/mnistData.cpp.s
+
 CMakeFiles/main.dir/src/net.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/net.cpp.o: src/net.cpp
 CMakeFiles/main.dir/src/net.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/net.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/net.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/net.cpp.o -MF CMakeFiles/main.dir/src/net.cpp.o.d -o CMakeFiles/main.dir/src/net.cpp.o -c /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/net.cpp
 
 CMakeFiles/main.dir/src/net.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/main.dir/src/net.cpp.s: cmake_force
 CMakeFiles/main.dir/src/neuron.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/neuron.cpp.o: src/neuron.cpp
 CMakeFiles/main.dir/src/neuron.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/neuron.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/src/neuron.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/neuron.cpp.o -MF CMakeFiles/main.dir/src/neuron.cpp.o.d -o CMakeFiles/main.dir/src/neuron.cpp.o -c /Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/neuron.cpp
 
 CMakeFiles/main.dir/src/neuron.cpp.i: cmake_force
@@ -129,6 +143,7 @@ CMakeFiles/main.dir/src/neuron.cpp.s: cmake_force
 main_OBJECTS = \
 "CMakeFiles/main.dir/src/layer.cpp.o" \
 "CMakeFiles/main.dir/src/main.cpp.o" \
+"CMakeFiles/main.dir/src/mnistData.cpp.o" \
 "CMakeFiles/main.dir/src/net.cpp.o" \
 "CMakeFiles/main.dir/src/neuron.cpp.o"
 
@@ -137,11 +152,12 @@ main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/src/layer.cpp.o
 main: CMakeFiles/main.dir/src/main.cpp.o
+main: CMakeFiles/main.dir/src/mnistData.cpp.o
 main: CMakeFiles/main.dir/src/net.cpp.o
 main: CMakeFiles/main.dir/src/neuron.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

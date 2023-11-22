@@ -1,3 +1,5 @@
+
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -17,7 +19,14 @@ void printVector(vector<double> v)
 
 double ReLu(double num)
 {
-    return max(0.0, num);
+    if (num > 0)
+    {
+        return num;
+    }
+    else
+    {
+        return 0.1 * num;
+    }
 }
 
 // base constructor
@@ -58,14 +67,13 @@ double Neuron::calcOutput(vector<double> inputs)
 // calculate gradients backward pass
 void Neuron::calcGrads(double grad) // grad is gradient from neuron next
 {
-    cout << "CalcGrads called with " << grad << endl;
+    // cout << "CalcGrads called with " << grad << endl;
     // ReLu derivative, if output is 0, gradient and bias have 0 added
     if (this->output != 0.0)
     {
         this->biasGrad += grad;
         for (int i = 0; i < this->weights.size(); i++)
         {
-            // TODO: fix this?
             this->weightGrads.at(i) += grad * this->inputs[i];
         }
     }

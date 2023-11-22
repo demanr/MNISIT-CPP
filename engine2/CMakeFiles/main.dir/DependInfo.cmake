@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/layer.cpp" "CMakeFiles/main.dir/src/layer.cpp.o" "gcc" "CMakeFiles/main.dir/src/layer.cpp.o.d"
   "/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.o" "gcc" "CMakeFiles/main.dir/src/main.cpp.o.d"
+  "/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/mnistData.cpp" "CMakeFiles/main.dir/src/mnistData.cpp.o" "gcc" "CMakeFiles/main.dir/src/mnistData.cpp.o.d"
   "/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/net.cpp" "CMakeFiles/main.dir/src/net.cpp.o" "gcc" "CMakeFiles/main.dir/src/net.cpp.o.d"
   "/Users/rae/Documents/GithubDesktopProjects/MNISIT-CPP/engine2/src/neuron.cpp" "CMakeFiles/main.dir/src/neuron.cpp.o" "gcc" "CMakeFiles/main.dir/src/neuron.cpp.o.d"
   )
