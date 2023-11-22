@@ -46,10 +46,7 @@ void Layer::backPass(vector<double> gradNext)
     for (int i = 0; i < this->neurons.size(); i++)
     {
 
-        for (int j = 0; j < gradNext.size(); j++)
-        {
-            this->neurons.at(i).calcGrads(gradNext.at(j));
-        }
+        this->neurons.at(i).calcGrads(gradNext.at(i));
     }
 }
 
