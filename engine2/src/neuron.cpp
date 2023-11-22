@@ -65,6 +65,7 @@ void Neuron::calcGrads(double grad) // grad is gradient from neuron next
         this->biasGrad += grad;
         for (int i = 0; i < this->weights.size(); i++)
         {
+            // TODO: fix this?
             this->weightGrads.at(i) += grad * this->inputs[i];
         }
     }

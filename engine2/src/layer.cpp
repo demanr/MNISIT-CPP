@@ -24,9 +24,9 @@ Layer::Layer(int numNeurons, int inputsToNeuron)
 // forward pass
 void Layer::forwardPass(vector<double> inputs)
 {
+    this->inputs = inputs;
     for (int i = 0; i < this->neurons.size(); i++)
     {
-        this->inputs.at(i) = inputs.at(i);
         this->outputs.at(i) = this->neurons.at(i).calcOutput(inputs);
     }
 }
@@ -45,10 +45,27 @@ void Layer::backPass(vector<double> gradNext)
 {
     for (int i = 0; i < this->neurons.size(); i++)
     {
-        cout << "BACKING THRU NEURON " << i << endl;
+
         for (int j = 0; j < gradNext.size(); j++)
         {
             this->neurons.at(i).calcGrads(gradNext.at(j));
+        }
+    }
+}
+
+// backwards pass with layer
+void Layer::backPass(Layer &l2)
+{
+    for (int i = 0; i < l2.inputs.size(); i++)
+    {
+        for (int j = 0; j < l2.neurons.size(); j++)
+        {
+            double prevGrad = l2.neurons.at(j).weightGrads.at(i) / l2.inputs.at(i);
+            if (l2.inputs.at(i) == 0)
+            {
+                prevGrad = 0;
+            }
+            this->neurons.at(i).calcGrads(prevGrad);
         }
     }
 }

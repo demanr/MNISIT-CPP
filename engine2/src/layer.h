@@ -20,6 +20,7 @@ public:
     void forwardPass(vector<double> inputs);
     // backwards pass
     void backPass(vector<double> gradNext);
+    void backPass(Layer &l2);
 
     // zero grad
     void zeroGrad();

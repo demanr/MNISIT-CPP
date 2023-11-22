@@ -6,6 +6,33 @@
 
 using namespace std;
 
+vector<double> reluback(Layer *nextlayer)
+{
+    vector<double> toBack = vector<double>(nextlayer->neurons.at(0).weights.size());
+
+    // first we build a single vector of all the gradients combined
+    for (int n = 0; n < nextlayer->inputs.size(); n++)
+    {
+        for (int i = 0; i < nextlayer->neurons.size(); i++)
+        {
+
+            toBack.at(n) += nextlayer->neurons.at(i).weights.at(n) * (nextlayer->neurons.at(i).weightGrads.at(n) / nextlayer->inputs.at(n));
+        }
+    }
+
+    // then we check if the input was negative
+    // and change it to a 0 because relu
+    for (int n = 0; n < nextlayer->inputs.size(); n++)
+    {
+        if (nextlayer->inputs.at(n) <= 0)
+        {
+            toBack.at(n) = 0;
+        }
+    }
+
+    return toBack;
+}
+
 int main()
 {
     srand(69);
@@ -19,33 +46,13 @@ int main()
     l1.forwardPass(inputs);
     vector<double> outsL1 = l1.outputs;
     l2.forwardPass(outsL1);
+
     vector<double> outsL2 = l2.outputs;
     printf("outputs: %f\n", outsL2.at(0));
     cout << "paon" << endl;
     // backpass
     l2.backPass({1});
-
-    cout << "DONE L2 BACKPASS" << endl;
-    // go thru each neuron in previous layer
-    vector<double> toBack = vector<double>(l2.neurons.at(0).weights.size());
-    for (int i = 0; i < l2.neurons.size(); i++)
-    {
-        cout << "BACKING THRU L1" << endl;
-
-        for (int j = 0; j < l2.neurons.at(i).weightGrads.size(); j++)
-        {
-            toBack.at(j) = l2.neurons.at(i).output;
-            toBack.at(j) /= l2.neurons.at(i).weightGrads.at(j);
-
-            if (l2.neurons.at(i).inputs.at(j) == 0)
-            {
-                toBack.at(j) = 0;
-            }
-        }
-
-        // l1.backPass(l2.neurons.at(i).weightGrads);
-    }
-    l1.backPass(toBack);
+    l1.backPass(reluback(&l2));
 
     //  print neuron data
     //  cout << "neuron 1 data: " << endl;
