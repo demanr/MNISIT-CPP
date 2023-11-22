@@ -20,92 +20,83 @@ double ReLu(double num)
     return max(0.0, num);
 }
 
-class Neuron
+// base constructor
+Neuron::Neuron(int inputAmount)
 {
-public:
-    int inputAmount;
-    double output;
-    double bias;
-    vector<double> weights;
-    vector<double> inputs;
-    // gradients
-    vector<double> weightGrads;
-    double biasGrad;
+    this->weights = vector<double>(inputAmount);
+    this->weightGrads = vector<double>(inputAmount);
 
-    // base constructor
-    Neuron(int inputAmount)
+    this->inputAmount = inputAmount;
+    double startWeight;
+
+    for (int i = 0; i < inputAmount; i++)
     {
-        this->weights = vector<double>(inputAmount);
-        this->weightGrads = vector<double>(inputAmount);
-
-        this->inputAmount = inputAmount;
-        double startWeight;
-
-        for (int i = 0; i < inputAmount; i++)
-        {
-            // gets random numbers btwn -1 and 1
-            startWeight = (rand() / (double)RAND_MAX) * 2 - 1;
-            this->weights.at(i) = startWeight;
-            this->weightGrads.at(i) = 0.0;
-        }
-
-        bias = (rand() / (double)RAND_MAX) * 2 - 1;
+        // gets random numbers btwn -1 and 1
+        startWeight = (rand() / (double)RAND_MAX) * 2 - 1;
+        this->weights.at(i) = startWeight;
+        this->weightGrads.at(i) = 0.0;
     }
 
-    // calculate output forward pass
-    double calcOutput(vector<double> inputs)
+    bias = (rand() / (double)RAND_MAX) * 2 - 1;
+}
+
+// calculate output forward pass
+double Neuron::calcOutput(vector<double> inputs)
+{
+    double out = this->bias;
+    this->inputs = inputs; // save inputs for backwards pass
+
+    for (int i = 0; i < inputs.size(); i++)
     {
-        double out = this->bias;
-        this->inputs = inputs; // save inputs for backwards pass
-
-        for (int i = 0; i < inputs.size(); i++)
-        {
-            out += inputs.at(i) * this->weights.at(i);
-        }
-        this->output = ReLu(out);
-
-        return this->output;
+        out += inputs.at(i) * this->weights.at(i);
     }
+    this->output = ReLu(out);
 
-    // calculate gradients backward pass
-    void calcGrads(double grad) // grad is gradient from neuron next
-    {
-        // ReLu derivative, if output is 0, gradient and bias have 0 added
-        if (this->output != 0.0)
-        {
-            this->biasGrad += grad;
-            for (int i = 0; i < this->weights.size(); i++)
-            {
-                this->weightGrads[i] += grad * this->inputs[i];
-            }
-        }
-    }
+    return this->output;
+}
 
-    void zeroGrad()
+// calculate gradients backward pass
+void Neuron::calcGrads(double grad) // grad is gradient from neuron next
+{
+    cout << "CalcGrads called with " << grad << endl;
+    // ReLu derivative, if output is 0, gradient and bias have 0 added
+    if (this->output != 0.0)
     {
-        this->biasGrad = 0.0;
+        this->biasGrad += grad;
         for (int i = 0; i < this->weights.size(); i++)
         {
-            this->weightGrads[i] = 0.0;
+            this->weightGrads.at(i) += grad * this->inputs[i];
         }
     }
-    void update(double learningRate)
-    {
-        // update bias
-        this->bias -= this->biasGrad * learningRate;
-        for (int i = 0; i < inputAmount; i++)
-        {
-            this->weights[i] -= this->weightGrads[i] * learningRate;
-        }
-    }
+}
 
-    // move constructor
-    Neuron(Neuron &&other)
+void Neuron::zeroGrad()
+{
+    this->biasGrad = 0.0;
+    for (int i = 0; i < this->weights.size(); i++)
     {
-        this->weights = std::move(other.weights);
-        this->bias = other.bias;
+        this->weightGrads[i] = 0.0;
     }
-};
+}
+void Neuron::update(double learningRate)
+{
+    // update bias
+    this->bias -= this->biasGrad * learningRate;
+    for (int i = 0; i < inputAmount; i++)
+    {
+        this->weights[i] -= this->weightGrads[i] * learningRate;
+    }
+}
+
+// move constructor
+Neuron::Neuron(Neuron &&other)
+{
+    this->weights = std::move(other.weights);
+    this->weightGrads = std::move(other.weightGrads);
+    this->inputs = std::move(other.inputs);
+    this->output = other.output;
+    this->bias = other.bias;
+}
 
 /*
 int main()
