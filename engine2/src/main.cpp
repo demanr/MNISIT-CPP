@@ -60,16 +60,19 @@ int main()
     // load testing data
     loadData(mnist_test_images, mnist_test_labels, "mnist_test.csv");
 
-    Layer l1 = Layer(64, 784);
-    Layer l2 = Layer(64, 64);
-    Layer l3 = Layer(10, 64);
+    Layer l1 = Layer(100, 784);
+    Layer l2 = Layer(40, 100);
+    Layer l3 = Layer(10, 40);
     Layer l4 = Layer(1, 10);
 
     vector<double> toBack;
     // learning rate
-    double learningRate = 0.01;
-    for (int epoch = 0; epoch < 50; epoch++)
+    double learningRate = 0.0001;
+    for (int epoch = 0; epoch < 70; epoch++)
     {
+        // gradually decrease learning rate to prevent overshooting
+        if (epoch < 5)
+            learningRate *= .75;
         double runningLoss = 0;
         for (int i = 0; i < mnist_train_images.size(); i++)
         {
@@ -95,7 +98,11 @@ int main()
             double loss = pow((outsL4.at(0) - expected), 2);
             runningLoss += loss;
 
-            cout << "epoch: " << epoch << ", i: " << i << ", Current Loss: " << loss << ", Running Loss: " << (runningLoss / i) << "          \r";
+            if (i % 1000 == 1)
+            {
+                cout << "epoch: " << epoch << ", i: " << i << ", Current Loss: " << loss << ", Running Loss: " << (runningLoss / i) << "          \r" << flush;
+                ;
+            }
 
             // now we need to find the gradient of the loss and pass it back
             // to the previous layer
@@ -153,7 +160,8 @@ int main()
         double loss = pow((outsL4.at(0) - expected), 2);
         //  cout running loss
         runningLoss += loss;
-        cout << "Current Loss : " << loss << ", Running Loss : " << (runningLoss / i) << endl;
+        cout << "\nTest Data Current Loss : " << loss << ", Running Loss : " << (runningLoss / i) << "          \r" << flush;
+        ;
     }
 
     // //  print neuron data
@@ -207,7 +215,8 @@ int main()
     //     cout << outs.at(i) << " ";
     // }
     // */
-    cout << "done!" << endl;
+    cout << "done!\n"
+         << endl;
 
     return 0;
 }
