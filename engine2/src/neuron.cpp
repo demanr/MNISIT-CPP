@@ -84,16 +84,16 @@ void Neuron::zeroGrad()
     this->biasGrad = 0.0;
     for (int i = 0; i < this->weights.size(); i++)
     {
-        this->weightGrads[i] = 0.0;
+        this->weightGrads.at(i) = 0.0;
     }
 }
 void Neuron::update(double learningRate)
 {
     // update bias
     this->bias -= this->biasGrad * learningRate;
-    for (int i = 0; i < inputAmount; i++)
+    for (int i = 0; i < this->weights.size(); i++)
     {
-        this->weights[i] -= this->weightGrads[i] * learningRate;
+        this->weights.at(i) -= this->weightGrads.at(i) * learningRate;
     }
 }
 
