@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 #include "neuron.h"
 
 using namespace std;
@@ -28,6 +29,10 @@ double ReLu(double num)
         return 0.1 * num;
     }
 }
+double Sigmoid(double num)
+{
+    return 1.0 / (1.0 + exp(-num));
+}
 
 // base constructor
 Neuron::Neuron(int inputAmount)
@@ -42,7 +47,7 @@ Neuron::Neuron(int inputAmount)
     {
         // gets random numbers btwn -1 and 1
         startWeight = (rand() / (double)RAND_MAX) * 2 - 1;
-        this->weights.at(i) = startWeight;
+        this->weights.at(i) = startWeight * 0.01;
         this->weightGrads.at(i) = 0.0;
     }
 
